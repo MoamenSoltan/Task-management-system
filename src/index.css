@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: "Open Sans", sans-serif;
+}
+
+@layer components {
+    .input-style{
+      width: 100%;
+      padding: 2px 5px;
+      border-bottom: solid 1px black  ;
+      outline: none;
+      
+    }
+    .popup{
+      z-index: 100000;
+    }
+  }
