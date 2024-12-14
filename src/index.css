@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 body {
-    font-family: "Open Sans", sans-serif;
+  /* to install font , look for font family and apply here , also add font to index.html */
+  font-family: "Source Sans 3", sans-serif;
 }
 
 @layer components {

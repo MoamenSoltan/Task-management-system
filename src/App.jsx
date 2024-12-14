@@ -3,12 +3,15 @@ import {BrowserRouter,Route,Routes} from 'react-router'
 import Dashboard from '../pages/Dashboard'
 import Signup from '../pages/Signup'
 import Login from '../pages/Login'
+import EmptyNotes from '../components/EmptyNotes'
+import NavBar from '../components/NavBar'
 
 
 function App() {
   
 
   return (
+  
    <div>
       <BrowserRouter>
     
