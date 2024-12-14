@@ -52,14 +52,13 @@ const getNotes = async ()=>{
   //TODO: Don’t make useEffect itself async.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(()=>{//TODO: get notes must be preceeded by await , therefore make an async func inside useeffect (because useeffect cant be async directly)
-   const fetchNotes = async ()=>{
-     await getNotes()
+  
+      getNotes()
     
     
-    
-   }
+   
 
-   fetchNotes(); //TODO: must be called
+  
 
   },[])
 
@@ -77,7 +76,7 @@ const getNotes = async ()=>{
      </div>): ( 
       <>
        <AddNote/>
-      <div className='flex justify-center items-center flex-row flex-wrap gap-5 p-4 mt-10'>
+      <div className='flex justify-center items-center flex-row  flex-wrap gap-5 p-4 mt-10'>
   {notes.map((note)=>(
     <NoteCard key={note.id} title={note.title} description={note.description} date={note.createdAt} />
   ))}
