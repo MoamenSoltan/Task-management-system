@@ -7,7 +7,7 @@ const EmptyUsers = () => {
         <div>
             <img src={emptySVG} className='w-40' alt='Empty Notes'/>
             <h1 className='text-xl text-gray-600'>No users yet!</h1>
-            <p className='text-gray-400'>as an admin , you can add users by clicking the "+" button in the bottom right</p>
+            {/* <p className='text-gray-400'>as an admin , you can add users by clicking the "+" button in the bottom right</p> */}
         </div>
     </div>
   )

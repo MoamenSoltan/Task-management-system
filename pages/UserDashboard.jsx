@@ -5,24 +5,32 @@ import axios from 'axios'
 import { ClipLoader } from 'react-spinners';
 import EmptyNotes from '../components/EmptyNotes';
 import AddNote from '../components/AddNote';
+import { useSelector,useDispatch } from 'react-redux';
+import { fetchNotes,incrementPage,setLoading,toggleHasMore } from '../Redux/Slices/notesSlice';
 
 
 
 
 const UserDashboard = () => {
-  //TODO: useState([]) only not array of objects
-  const [notes, setNotes] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [page, setPage] = useState(1)
-  const [hasMore, setHasMore] = useState(true)
+
+
+
+  const {notes,loading,hasMore,page}=useSelector(state=>state.notes)
+  const dispatch=useDispatch()
+
+  // //TODO: useState([]) only not array of objects
+  // const [notes, setNotes] = useState([])
+  // const [isLoading, setIsLoading] = useState(false)
+  // const [page, setPage] = useState(1)
+  // const [hasMore, setHasMore] = useState(true)
   
 
   // TODO: getnotes can be in a different file or store for better organization
 
 const getNotes = async ()=>{
-  if (isLoading)
+  if (loading)
     return;
-  setIsLoading(true)
+  dispatch(setLoading(true))
   
   // TODO: handle errors properly.
   try {
@@ -31,15 +39,14 @@ const getNotes = async ()=>{
       //wouldn't work on react strict mode
       
       if(response.data.length>0){
-        setNotes((prevNotes)=>([...prevNotes,...response.data]))
-        setPage(prevPage=>prevPage+1)
+        dispatch(fetchNotes(response.data))//like setNotes in useState
+        dispatch(incrementPage())
 
       }else {
-        setHasMore(false)
+        dispatch(toggleHasMore())
       }
       
-      setIsLoading(false)
-      
+        dispatch(setLoading(false))      
     } catch (error) {
       console.log(error);
       
@@ -68,8 +75,8 @@ const getNotes = async ()=>{
   
   return (
     
-     isLoading ? ( <div className="w-full h-screen fixed flex justify-center items-center inset-0">
-      <ClipLoader size={50} color="#3498db" loading={isLoading} />
+     loading ? ( <div className="w-full h-screen fixed flex justify-center items-center inset-0">
+      <ClipLoader size={50} color="#3498db" loading />
     </div>) :notes.length===0 ?
      (<div>
       <EmptyNotes/> <AddNote/>
@@ -78,14 +85,14 @@ const getNotes = async ()=>{
        <AddNote/>
       <div className='flex justify-center items-center flex-row  flex-wrap gap-5 p-4 mt-10'>
   {notes.map((note)=>(
-    <NoteCard key={note.id} title={note.title} description={note.description} date={note.createdAt} />
+    <NoteCard key={note.id}id={note.id} title={note.title} description={note.description} date={note.createdAt} />
   ))}
 </div>
 
 
 
 
-{hasMore &&!isLoading && <div className='w-full flex justify-center'>
+{hasMore &&!loading && <div className='w-full flex justify-center'>
   <button onClick={()=>{getNotes()}} className='mt- 10 bg-blue-500 w-36 m-auto p-2 rounded-md my-10 text-white hover:bg-blue-800 transition-all hover:scale-110 '>Load more</button></div>}
 
 </>) 

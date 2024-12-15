@@ -5,6 +5,7 @@ import { ToggleAddNotes,closeAddNotes } from '../Redux/Slices/modalSlice';
 import { useDispatch } from 'react-redux';
 import Modal from 'react-modal';
 import ModalAddNotes from './ModalAddNotes';
+import ModalTemplate from './ModalTemplate';
 
 Modal.setAppElement('#root'); // Required for accessibility
 
@@ -30,7 +31,9 @@ const AddNote = () => {
         className="modal-content"
         overlayClassName="modal-overlay"
       >
-        <ModalAddNotes/>
+        <ModalTemplate>
+           <ModalAddNotes/>
+        </ModalTemplate>
       </Modal>
   
   </>
