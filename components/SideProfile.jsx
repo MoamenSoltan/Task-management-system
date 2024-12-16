@@ -33,7 +33,7 @@ const SideProfile = () => {
   return (
     //TODO: fixed to overlap the other elements
     <div className=' w-screen h-screen z-50 fixed bg-half-transparent top-0 right-0'>
-       <div className='z-50 w-[25%]  bg-white float-right h-screen p-4'>
+       <div className='z-50 w-[400px]  bg-white float-right h-screen p-4'>
 
         <button className='text-xl' onClick={()=>{dispatch(toggleSideBar())}}><MdOutlineCancel />
         </button>
