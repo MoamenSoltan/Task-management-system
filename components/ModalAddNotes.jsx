@@ -46,7 +46,7 @@ const ModalAddNotes = () => {
           </button>
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-4 flex-nowrap w-[60%] justify-center"
+            className="flex flex-col gap-4 flex-nowrap w-[80%] justify-center"
           >
             <input
               type="text"

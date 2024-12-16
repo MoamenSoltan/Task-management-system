@@ -23,7 +23,8 @@ const Signup = () => {
   })
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/ //atleast 8 characters
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
+ //atleast 8 characters
 
   const validate=()=>{
     if (!user.name||!user.email||!user.password||!user.role||!user.verifyEmail) {
