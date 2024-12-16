@@ -1,9 +1,16 @@
 import { useState} from "react"
+import { useSelector } from "react-redux"
 import {useNavigate} from 'react-router'
 import { Link } from "react-router"
+import { useDispatch } from "react-redux"
+import { setCurrentUser,fetchUsers } from "../Redux/Slices/userSlice"
+import axios from "axios"
 // validation func returns a bool 
 const Signup = () => {
 
+  const {currentUser,users}=useSelector(state=>state.users)
+
+  const dispatch= useDispatch()
 
   const navigate=useNavigate()
   const [error, setError] = useState(null)
@@ -48,12 +55,20 @@ const Signup = () => {
 
     return true
   }
-  const handleSubmit =(e)=>{
+  
+  const handleSubmit = async (e)=>{
     e.preventDefault();
     const isValid=validate()
     if(!isValid)
       return;
     try {
+
+      // await axios.post("https://67597b75099e3090dbe1d697.mockapi.io/api/users",user)
+
+      dispatch(setCurrentUser(user))
+      // dispatch(fetchUsers([user]))
+      
+      
       
       // localStorage.setItem("user", JSON.stringify(user))
       if(user.role==="admin")

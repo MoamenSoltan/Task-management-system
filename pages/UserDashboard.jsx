@@ -15,7 +15,9 @@ const UserDashboard = () => {
 
 
 
+
   const {notes,loading,hasMore,page}=useSelector(state=>state.notes)
+  const {currentUser,sideBar}=useSelector(state=>state.users)
   const dispatch=useDispatch()
 
   // //TODO: useState([]) only not array of objects
@@ -59,9 +61,10 @@ const getNotes = async ()=>{
   //TODO: Don’t make useEffect itself async.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(()=>{//TODO: get notes must be preceeded by await , therefore make an async func inside useeffect (because useeffect cant be async directly)
-  
+
       getNotes()
     
+    console.log("Current User : ",currentUser);
     
    
 
@@ -82,7 +85,7 @@ const getNotes = async ()=>{
       <EmptyNotes/> <AddNote/>
      </div>): ( 
       <>
-       <AddNote/>
+       
       <div className='flex justify-center items-center flex-row  flex-wrap gap-5 p-4 mt-10'>
   {notes.map((note)=>(
     <NoteCard key={note.id}id={note.id} title={note.title} description={note.description} date={note.createdAt} />
@@ -95,7 +98,11 @@ const getNotes = async ()=>{
 {hasMore &&!loading && <div className='w-full flex justify-center'>
   <button onClick={()=>{getNotes()}} className='mt- 10 bg-blue-500 w-36 m-auto p-2 rounded-md my-10 text-white hover:bg-blue-800 transition-all hover:scale-110 '>Load more</button></div>}
 
+  {!sideBar && <AddNote/>}
+  {/* TODO: fix for addnote overlapping , by conditional rendering */}
+
 </>) 
+
    
     
   )

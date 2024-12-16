@@ -1,8 +1,12 @@
 import { useState} from "react"
 import {useNavigate} from 'react-router'
 import { Link } from "react-router"
+import { setCurrentUser,fetchUsers } from "../Redux/Slices/userSlice"
+import { useDispatch } from "react-redux"
 // validation func returns a bool 
 const Login = () => {
+
+  const dispatch=useDispatch()
 
 
   const navigate=useNavigate()
@@ -49,9 +53,9 @@ const Login = () => {
     if(!isValid)
       return;
     try {
+      dispatch(setCurrentUser({...user,role:"user"}))
       
-      localStorage.setItem("user", user)
-      navigate('/dashboard')
+      navigate('/user/dashboard')
     
       
     } catch (error) {

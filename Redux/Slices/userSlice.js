@@ -2,10 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     users :[] , 
+    currentUser: JSON.parse(localStorage.getItem('currentUser')) || {},
     loading : false , 
     error : null ,
     hasMore :true,
     page : 1 ,
+    sideBar:false
 }
 
 const usersSlice = createSlice({
@@ -38,11 +40,18 @@ const usersSlice = createSlice({
             if (index !== -1) {
               state.users[index] = action.payload;
             }
+          },
+          setCurrentUser : (state, action) => {
+            state.currentUser = action.payload;
+            localStorage.setItem('currentUser', JSON.stringify(action.payload));
+          },
+          toggleSideBar : (state) => {
+            state.sideBar = !state.sideBar
           }
     }
 })
 
 //these are our actions 
-export const { fetchUsers, addUser, updateUser, deleteUser, setLoading, setError,incrementPage ,toggleHasMore} = usersSlice.actions;
+export const { fetchUsers, addUser, updateUser, deleteUser, setLoading, setError,incrementPage ,toggleHasMore,setCurrentUser,toggleSideBar} = usersSlice.actions;
 export default usersSlice.reducer;
 //export default can take any name afterwards , only once per file

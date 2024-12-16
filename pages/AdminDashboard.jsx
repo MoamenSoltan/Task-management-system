@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers, setLoading, incrementPage, toggleHasMore } from "../Redux/Slices/userSlice";
 import axios from "axios";
 import UserCard from "../components/UserCard";
 import { ClipLoader } from "react-spinners";
 import EmptyUsers from "../components/EmptyUsers";
-import AddUser from "../components/AddUser";
-import { ToggleDeleteUser, closeDeleteUser, ToggleUpdateUser, closeUpdateUser } from "../Redux/Slices/modalSlice";
+import {  closeDeleteUser, closeUpdateUser } from "../Redux/Slices/modalSlice";
 import ModalDeleteUser from "../components/ModalDeleteUser";
 import ModalUpdateUser from "../components/ModalUpdateUser";
 
@@ -38,13 +37,7 @@ const AdminDashboard = () => {
     getUsers();
   }, []);
 
-  const handleDelete = (id) => {
-    dispatch(ToggleDeleteUser(id)); // Open delete modal with user ID
-  };
-
-  const handleUpdate = (user) => {
-    dispatch(ToggleUpdateUser(user)); // Open update modal with user data
-  };
+;
 
   return (
     <div>
@@ -64,8 +57,7 @@ const AdminDashboard = () => {
                 id={user.id}
                 name={user.name}
                 email={user.email}
-                onDelete={() => handleDelete(user.id)} // Pass delete handler
-                onUpdate={() => handleUpdate(user)} // Pass update handler
+               
               />
             </div>
           ))}
