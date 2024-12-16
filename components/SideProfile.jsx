@@ -9,24 +9,14 @@ import { LuLogOut } from "react-icons/lu";
 
 const SideProfile = () => {
   const dispatch = useDispatch();
-  const {currentUser,sideBar}=useSelector(state=>state.users)
+  const {currentUser}=useSelector(state=>state.users)
 
 
   const handleLogout = ()=>{
     dispatch(setCurrentUser(null))
     dispatch(toggleSideBar())
   }
-  useEffect(() => {
-    if (sideBar) {
-      document.body.classList.add('overflow-hidden'); // Add Tailwind class to body
-    } else {
-      document.body.classList.remove('overflow-hidden'); // Remove Tailwind class
-    }
-
-    return () => {
-      document.body.classList.remove('overflow-hidden'); // Clean up on unmount
-    }
-  }, [sideBar])
+ 
 
 
 
@@ -43,7 +33,7 @@ const SideProfile = () => {
         </div>
         {/* TODO: add other profile options */}
 
-        <div className='flex p-4 flex-col h-screen gap-96'>
+        <div className='flex p-4 flex-col h-[70%] justify-between'>
           
         <form className='w-full p-5 flex flex-col gap-10'>
          <div>

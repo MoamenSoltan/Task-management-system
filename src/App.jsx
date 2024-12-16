@@ -3,8 +3,27 @@ import Dashboard from '../pages/Dashboard'
 import Signup from '../pages/Signup'
 import Login from '../pages/Login'
 import ProtectedRoute from '../components/ProtectedRoute'
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 function App() {
+
+
+  const { AddNotesModal, DeleteNotesModal, DeleteUsersModal, UpdateNotesModal, UpdateUserModal } = useSelector(state => state.modals);
+  const { sideBar } = useSelector(state => state.users);
+
+  // Global handling for modals , instead of only sideBar
+  useEffect(() => {
+      if (sideBar ||AddNotesModal||DeleteNotesModal||DeleteUsersModal||UpdateNotesModal||UpdateUserModal) {
+        document.body.classList.add('overflow-hidden'); // Add Tailwind class to body
+      } else {
+        document.body.classList.remove('overflow-hidden'); // Remove Tailwind class
+      }
+  
+      return () => {
+        document.body.classList.remove('overflow-hidden'); // Clean up on unmount
+      }
+    }, [sideBar, AddNotesModal,DeleteNotesModal,DeleteUsersModal,UpdateNotesModal,UpdateUserModal])
   return (
     <div>
       <BrowserRouter>
