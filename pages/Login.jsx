@@ -41,7 +41,7 @@ const Login = () => {
 
      else if(!passwordRegex.test(user.password))
       {
-        setError("Enter a valid password , atleast 8 characters")
+        setError("Enter a valid password , 8 Characters , containing numbers and characters")
         return false
       }
     setError(null)
@@ -67,7 +67,7 @@ const Login = () => {
   return (
     <div className='min-w-full h-[100vh] flex  justify-center  bg-gray-600 '>
       
-      <div className="w-[400px] h-[70vh] rounded-lg p-10 m-auto bg-white drop-shadow-lg text-center">
+      <div className="w-[400px] h-[75vh] rounded-lg p-10 m-auto bg-white drop-shadow-lg text-center">
 
       <h1 className="font-semibold mb-20 ">Login</h1>
       <form className='flex flex-col gap-10 flex-nowrap  justify-center' onSubmit={handleSubmit} >
