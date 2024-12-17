@@ -40,13 +40,13 @@ const ModalUpdateNote = ({ note }) => {
         type="text"
         value={updatedNote.title}
         onChange={(e) => setUpdatedNote({ ...updatedNote, title: e.target.value })}
-        className="p-2 border-2 border-gray-300 rounded-lg mb-4"
+        className="input-style mb-10"
         placeholder="Title"
       />
       <textarea
         value={updatedNote.description}
         onChange={(e) => setUpdatedNote({ ...updatedNote, description: e.target.value })}
-        className="p-2 border-2 border-gray-300 rounded-lg mb-4"
+        className="w-full h-40 p-4 border-2 border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-700 transition-all"
         placeholder="Description"
       />
       <div className='flex justify-between p-4 w-[80%]'>
