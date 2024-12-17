@@ -35,7 +35,7 @@ const ModalAddNotes = () => {
   return (
  
       
-        <>
+        <div className="w-full flex justify-center items-center p-2">
           <h1 className="absolute top-10 text-2xl">Enter note Details below</h1>
           <button
             onClick={() => dispatch(closeAddNotes())}
@@ -75,7 +75,7 @@ const ModalAddNotes = () => {
               Add Note
             </button>
           </form>
-        </>
+        </div>
     
   );
 };
