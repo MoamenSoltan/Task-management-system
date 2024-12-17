@@ -19,7 +19,7 @@ const AddNote = () => {
   return (
   <>
     <button onClick={()=>{dispatch(ToggleAddNotes()) ;console.log(AddNotesModal);
-    }}  className='p-10    text-white text-3xl rounded-full bg-blue-500 fixed bottom-10 right-10 hover:scale-105 transition-all '>
+    }}  className='p-7 text-xl   text-white md:text-3xl md:p-10 rounded-full bg-blue-500 fixed bottom-10 right-10 hover:scale-105 transition-all '>
        <FaPlus /> 
 
     </button>

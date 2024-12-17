@@ -18,16 +18,15 @@ const ModalAddNotes = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios.post(
+   const response = await axios.post(
       "https://67597b75099e3090dbe1d697.mockapi.io/api/notes",
       note
     );
     // dispatch(fetchNotes([note]))
     // console.log("notes after last update",notes);
-    dispatch(addNote(note));
+    dispatch(addNote(response.data));//update the state 
 
     dispatch(setNote({ title: "", description: "", date: "" }));
-    setTimeout(() => window.location.reload(), 200);
     dispatch(closeAddNotes());
   };
 

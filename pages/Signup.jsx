@@ -49,7 +49,7 @@ const Signup = () => {
 
      else if(!passwordRegex.test(user.password))
       {
-        setError("Enter a valid password , atleast 8 characters")
+        setError("Enter a valid password , 8 Characters , containing numbers and characters")
         return false
       }
     setError(null)
@@ -115,7 +115,7 @@ const Signup = () => {
 
       {error&& <h2 className="font-semibold mt-2 text-red-500">{error}</h2>}
 
-      <h2 className="mt-10 text-gray-800 font-semibold">Already have an account? {<Link className="text-blue-500" to={"/login"}>login</Link>} </h2>
+      <h2 className=" text-gray-800 font-semibold">Already have an account? {<Link className="text-blue-500" to={"/login"}>login</Link>} </h2>
       </div>
       
     </div>
