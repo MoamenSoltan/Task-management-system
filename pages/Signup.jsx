@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import {useNavigate} from 'react-router'
 import { Link } from "react-router"
 import { useDispatch } from "react-redux"
-import { setCurrentUser,fetchUsers } from "../Redux/Slices/userSlice"
+import { setCurrentUser ,addUser} from "../Redux/Slices/userSlice"
 import axios from "axios"
 // validation func returns a bool 
 const Signup = () => {
@@ -64,10 +64,10 @@ const Signup = () => {
       return;
     try {
 
-      // await axios.post("https://67597b75099e3090dbe1d697.mockapi.io/api/users",user)
+      const response =await axios.post("https://67597b75099e3090dbe1d697.mockapi.io/api/users",user)
 
-      dispatch(setCurrentUser(user))
-      // dispatch(fetchUsers([user]))
+      dispatch(setCurrentUser(response.data))
+      dispatch(addUser(response.data))
       
       
       

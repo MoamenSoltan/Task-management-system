@@ -5,6 +5,7 @@ import Login from '../pages/Login'
 import ProtectedRoute from '../components/ProtectedRoute'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+// TODO: key takeaway from project : use response from backend to set data back for a re-render , look at signup and modalAddNotes and modalDeleteuser
 
 function App() {
 

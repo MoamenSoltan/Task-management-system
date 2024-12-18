@@ -1,20 +1,27 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteUser } from "../Redux/Slices/userSlice"; // Import deleteUser action
 import { closeDeleteUser } from "../Redux/Slices/modalSlice";  // Ensure correct import for closing modal
 import axios from "axios";
+import { setCurrentUser } from "../Redux/Slices/userSlice";
 
 const ModalDeleteUser = ({ isOpen, onClose, userId }) => {
+
+  const {currentUser}=useSelector(state=>state.users)
   const dispatch = useDispatch();
 
   // Handle delete user action
   const handleDelete = async () => {
     try {
       // Make API request to delete the user
-      await axios.delete(`https://67597b75099e3090dbe1d697.mockapi.io/api/users/${userId}`);
+     const response =  await axios.delete(`https://67597b75099e3090dbe1d697.mockapi.io/api/users/${userId}`);
       
       // Dispatch action to update Redux store and remove the user
       dispatch(deleteUser(userId));
+       // dispatch(deleteUser(response.data.id)); //could be used instead of userId
+
+      if(currentUser.id===userId) 
+        dispatch(setCurrentUser(null))  // Log out the user if he deleted his account
 
       // Close the modal after deletion
       onClose();

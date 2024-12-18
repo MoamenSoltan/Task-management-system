@@ -14,6 +14,8 @@ const ModalDeleteNote = () => {
         
       await axios.delete(`https://67597b75099e3090dbe1d697.mockapi.io/api/notes/${deleteNoteId}`);
       dispatch(deleteNote(deleteNoteId));
+//      dispatch(deleteNote(response.data.id));
+
       dispatch(closeDeleteNotes())
     } catch (error) {
       console.log(error)

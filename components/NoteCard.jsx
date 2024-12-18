@@ -38,7 +38,7 @@ const NoteCard = ({id,title,description,date}) => {
   return (
     <div className=' md:w-2/5 lg:w-1/5 sm:w-1/2  h-[35vh] bg-white rounded-lg shadow-lg overflow-hidden flex flex-col flex-auto flex-nowrap items-center p-4 hover:scale-105 transition-all'>
         <h2 className='text-xl h-[20%]'>{title}</h2>
-        <p className='mt-10 text-sm w-[80%] h-[50%] overflow-hidden'>{description}</p>
+        <p className='mt-10 text-sm w-[80%] h-[50%] overflow-auto'>{description}</p>
         
               <p className=' mt-10 font-bold text-2xl '>{date}</p>
        
