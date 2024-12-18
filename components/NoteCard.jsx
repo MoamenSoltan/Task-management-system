@@ -9,6 +9,7 @@ import ModalTemplate from './ModalTemplate';
 import ModalDeleteNote from './ModalDeleteNote';
 import { ToggleDeleteNotes,closeDeleteNotes,ToggleUpdateNotes,closeUpdateNotes } from '../Redux/Slices/modalSlice';
 import ModalUpdateNote from './ModalUpdateNote';
+import { Scrollbar } from 'react-scrollbars-custom';
 
 
 
@@ -38,7 +39,10 @@ const NoteCard = ({id,title,description,date}) => {
   return (
     <div className=' md:w-2/5 lg:w-1/5 sm:w-1/2  h-[35vh] bg-white rounded-lg shadow-lg overflow-hidden flex flex-col flex-auto flex-nowrap items-center p-4 hover:scale-105 transition-all'>
         <h2 className='text-xl h-[20%]'>{title}</h2>
-        <p className='mt-10 text-sm w-[80%] h-[50%] overflow-auto'>{description}</p>
+        
+        <Scrollbar style={{ width: 400, height: 250 }}>
+          <p className='mt-10 text-sm w-[80%] h-[50%] overflow-auto'>{description}</p>
+        </Scrollbar>
         
               <p className=' mt-10 font-bold text-2xl '>{date}</p>
        
