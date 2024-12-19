@@ -35,9 +35,9 @@ const AdminDashboard = () => {
     }
   };
   // instead of setting isloading to false in catch , make a 'finally statement 
-  useEffect(() => {
-    getUsers();
-  }, []);
+  // useEffect(() => {
+  //   getUsers();
+  // }, []);
 
 ;
 

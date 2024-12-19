@@ -59,6 +59,26 @@ const Signup = () => {
     return true
   }
 
+  const getUsers = async () => {
+    dispatch(setLoading(true));
+
+    try {
+      const response = await axios.get(
+        `https://67597b75099e3090dbe1d697.mockapi.io/api/users?page=${page}&limit=2`
+      );
+      dispatch(addUser(response.data));
+      if (response.data.length > 0) {
+        dispatch(incrementPage());
+      } else {
+        dispatch(toggleHasMore());
+      }
+      dispatch(setLoading(false));
+    } catch (error) {
+       console.log("Error fetching users:", error);
+            dispatch(setLoading(false)) 
+            alert('Failed to load users. Please try again.')
+    }
+  };
  
   
   const handleSubmit = async (e)=>{
@@ -71,9 +91,9 @@ const Signup = () => {
       const response =await axios.post("https://67597b75099e3090dbe1d697.mockapi.io/api/users",user)
 
       dispatch(setCurrentUser(response.data))
-      
-      dispatch(fetchUsers([...users, response.data]))
-      // dispatch(fetchUsers([response.data]))
+      getUsers()
+      // dispatch(fetchUsers([...users, response.data]))
+      // dispatch(fetchUsers([response.data]))  
 
       
       
