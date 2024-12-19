@@ -72,8 +72,8 @@ const Signup = () => {
 
       dispatch(setCurrentUser(response.data))
       
-      // dispatch(fetchUsers([...users, response.data]))
-      dispatch(fetchUsers([response.data]))
+      dispatch(fetchUsers([...users, response.data]))
+      // dispatch(fetchUsers([response.data]))
 
       
       
