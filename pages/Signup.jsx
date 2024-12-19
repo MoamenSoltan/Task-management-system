@@ -5,10 +5,12 @@ import { Link } from "react-router"
 import { useDispatch } from "react-redux"
 import { setCurrentUser ,addUser} from "../Redux/Slices/userSlice"
 import axios from "axios"
+import { fetchUsers, setLoading, incrementPage, toggleHasMore } from "../Redux/Slices/userSlice";
 // validation func returns a bool 
 const Signup = () => {
 
-  const {currentUser,users}=useSelector(state=>state.users)
+  const {currentUser,users,loading, hasMore, page}=useSelector(state=>state.users)
+ 
 
   const dispatch= useDispatch()
 
@@ -56,6 +58,8 @@ const Signup = () => {
 
     return true
   }
+
+ 
   
   const handleSubmit = async (e)=>{
     e.preventDefault();
@@ -67,7 +71,10 @@ const Signup = () => {
       const response =await axios.post("https://67597b75099e3090dbe1d697.mockapi.io/api/users",user)
 
       dispatch(setCurrentUser(response.data))
-      dispatch(addUser(response.data))
+      
+      // dispatch(fetchUsers([...users, response.data]))
+      dispatch(fetchUsers([response.data]))
+
       
       
       
