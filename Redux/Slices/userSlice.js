@@ -17,6 +17,9 @@ const usersSlice = createSlice({
         fetchUsers : (state,action)=>{
             state.users = [...state.users,...action.payload]
         },
+        setUsers : (state,action)=>{
+          state.users=[...action.payload]
+        },
         setLoading: (state, action) => {
             state.loading = action.payload;
           },
@@ -52,6 +55,6 @@ const usersSlice = createSlice({
 })
 
 //these are our actions 
-export const { fetchUsers, addUser, updateUser, deleteUser, setLoading, setError,incrementPage ,toggleHasMore,setCurrentUser,toggleSideBar} = usersSlice.actions;
+export const { fetchUsers, addUser, updateUser, deleteUser, setLoading, setError,incrementPage ,toggleHasMore,setCurrentUser,toggleSideBar,setUsers} = usersSlice.actions;
 export default usersSlice.reducer;
 //export default can take any name afterwards , only once per file
