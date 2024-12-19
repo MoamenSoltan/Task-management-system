@@ -29,7 +29,9 @@ const ModalUpdateNote = ({ note }) => {
 
       dispatch(closeUpdateNotes());  // Close the modal after updating
     } catch (error) {
-      console.log(error);
+      console.log("Error fetching notes:", error);
+      alert('Failed to update note. Please try again.')
+      
     }
   };
 

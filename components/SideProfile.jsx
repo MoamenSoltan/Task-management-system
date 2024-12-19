@@ -3,6 +3,7 @@ import { MdOutlineCancel } from "react-icons/md";
 import { setCurrentUser, toggleSideBar } from '../Redux/Slices/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { LuLogOut } from "react-icons/lu";
+import Summary from './Summary';
 
 
 
@@ -51,9 +52,14 @@ const SideProfile = () => {
 
          
         </form>
+        <Summary/>
 
         <button className='bg-red-500 w-14 p-4 rounded-lg text-white text-2xl' onClick={()=>{handleLogout()}} ><LuLogOut /></button>
+
+       
+
         </div>
+
 
 
        </div>

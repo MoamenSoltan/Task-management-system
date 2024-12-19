@@ -26,7 +26,9 @@ const ModalDeleteUser = ({ isOpen, onClose, userId }) => {
       // Close the modal after deletion
       onClose();
     } catch (error) {
-      console.log(error);  // Log error if delete fails
+      console.log("Error fetching notes:", error);
+      alert('Failed to delete user. Please try again.')
+      
     }
   };
 

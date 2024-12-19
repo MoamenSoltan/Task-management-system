@@ -3,6 +3,7 @@ import { Route, Routes, Navigate } from "react-router-dom"
 import AdminDashboard from "./AdminDashboard"
 import UserDashboard from "./UserDashboard"
 import { useSelector } from 'react-redux'
+import PageNoteFound from "./PageNoteFound"
 
 const Dashboard = ({ userType }) => {
   const { currentUser } = useSelector(state => state.users);
@@ -22,6 +23,7 @@ const Dashboard = ({ userType }) => {
         {userType === "user" && (
           <Route path="dashboard" element={<UserDashboard />} />
         )}
+         <Route path='*' element={<PageNoteFound/>} />
       </Routes>
     </div>
   )

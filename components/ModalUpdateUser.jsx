@@ -30,7 +30,9 @@ const ModalUpdateUser = ({ isOpen, onClose, user }) => {
       dispatch(updateUser(response.data));
       onClose();  // Close the modal after updating
     } catch (error) {
-      console.log(error);
+      
+      dispatch(setLoading(false)) 
+      alert('Failed to update user. Please try again.')
     }
   };
 

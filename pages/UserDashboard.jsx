@@ -50,9 +50,13 @@ const getNotes = async ()=>{
       
         dispatch(setLoading(false))      
     } catch (error) {
-      console.log(error);
+      console.log("Error fetching notes:", error);
+      dispatch(setLoading(false)) 
+      alert('Failed to load notes. Please try again.')
       
     }
+  // instead of setting isloading to false in catch , make a 'finally statement 
+
 }
 
 
@@ -86,7 +90,7 @@ const getNotes = async ()=>{
      </div>): ( 
       <>
        
-      <div className='flex justify-center items-center flex-row  flex-wrap gap-5 p-4 mt-10'>
+      <div className='flex  justify-center items-center flex-row  flex-wrap gap-5 p-4 mt-10'>
   {notes.map((note)=>(
     <NoteCard key={note.id}id={note.id} title={note.title} description={note.description} date={note.createdAt} />
   ))}

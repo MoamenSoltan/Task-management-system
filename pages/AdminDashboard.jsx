@@ -29,10 +29,12 @@ const AdminDashboard = () => {
       }
       dispatch(setLoading(false));
     } catch (error) {
-      console.log(error);
+       console.log("Error fetching users:", error);
+            dispatch(setLoading(false)) 
+            alert('Failed to load users. Please try again.')
     }
   };
-
+  // instead of setting isloading to false in catch , make a 'finally statement 
   useEffect(() => {
     getUsers();
   }, []);

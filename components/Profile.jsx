@@ -12,9 +12,10 @@ const Profile = () => {
   const dispatch = useDispatch()
   return (
     <div className=' flex z-50 p-4 w-[20%] justify-center items-center gap-4 '>
+       {sideBar && <SideProfile className = {"z-auto"} />}
         <button className='hover:drop-shadow-xl' onClick={()=>{dispatch(toggleSideBar())}}><CgProfile className='text-5xl text-gray-600'/></button>
         <h1 className='text-xl'>Welcome <span className='font-semibold'>{currentUser.name}</span></h1>
-        {sideBar && <SideProfile className = {"z-auto"} />}
+       
 
     </div>
   )

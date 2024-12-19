@@ -18,7 +18,9 @@ const ModalDeleteNote = () => {
 
       dispatch(closeDeleteNotes())
     } catch (error) {
-      console.log(error)
+      
+      alert('Failed to delete note. Please try again.')
+      
     }
   }
 

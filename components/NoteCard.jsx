@@ -16,6 +16,7 @@ import { Scrollbar } from 'react-scrollbars-custom';
 const NoteCard = ({id,title,description,date}) => {
   Modal.setAppElement('#root'); // Required for accessibility
   const {DeleteNotesModal,UpdateNotesModal,noteToUpdate}=useSelector(state=>state.modals)
+  const {sideBar}= useSelector(state=>state.users)
 
   const dispatch = useDispatch()
   // const handleDelete = async () => {
@@ -37,7 +38,7 @@ const NoteCard = ({id,title,description,date}) => {
   // flex-auto , to make a div grow and shrink , but takes into account the original size , unlike flex-1 
 
   return (
-    <div className=' md:w-2/5 lg:w-1/5 sm:w-1/2  h-[35vh] bg-white rounded-lg shadow-lg overflow-hidden flex flex-col flex-auto flex-nowrap items-center p-4 hover:scale-105 transition-all'>
+    <div className={` md:w-2/5 lg:w-1/5 ${sideBar &&"-z-10"} sm:w-1/2  h-[35vh] bg-white rounded-lg shadow-lg overflow-hidden flex flex-col flex-auto flex-nowrap items-center p-4 hover:scale-105 transition-all`}>
         <h2 className='text-xl h-[20%]'>{title}</h2>
         
         <Scrollbar style={{ width: 280, height: 250 }}>
