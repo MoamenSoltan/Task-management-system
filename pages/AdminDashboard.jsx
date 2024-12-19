@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setUsers, setLoading, incrementPage, toggleHasMore } from "../Redux/Slices/userSlice";
+import { fetchUsers, setLoading, incrementPage, toggleHasMore } from "../Redux/Slices/userSlice";
 import axios from "axios";
 import UserCard from "../components/UserCard";
 import { ClipLoader } from "react-spinners";
@@ -11,9 +11,7 @@ import ModalUpdateUser from "../components/ModalUpdateUser";
 
 const AdminDashboard = () => {
   const { users, loading, hasMore, page } = useSelector((state) => state.users);
-  const { DeleteUsersModal, UpdateUserModal, userToUpdate, deleteUserId } = useSelector(
-    (state) => state.modals
-  );
+  const { DeleteUsersModal, UpdateUserModal, userToUpdate, deleteUserId } = useSelector((state) => state.modals);
   const dispatch = useDispatch();
 
   const getUsers = async () => {
@@ -23,27 +21,28 @@ const AdminDashboard = () => {
       const response = await axios.get(
         `https://67597b75099e3090dbe1d697.mockapi.io/api/users?page=${page}&limit=2`
       );
-      // Append the new users to the existing users array
-      dispatch(setUsers([...users, ...response.data]));
+      
+      //  Use fetchUsers to merge new users into existing ones
+      dispatch(fetchUsers(response.data));
+      
+      console.log("Users after API call:", response.data);
+      
       if (response.data.length > 0) {
-        dispatch(incrementPage()); // Increment page if users are returned
+        dispatch(incrementPage());
       } else {
-        dispatch(toggleHasMore()); 
+        dispatch(toggleHasMore());
       }
     } catch (error) {
       console.log("Error fetching users:", error);
       alert('Failed to load users. Please try again.');
     } finally {
-      dispatch(setLoading(false)); 
+      dispatch(setLoading(false));
     }
   };
-
   
   useEffect(() => {
-    if (users.length === 0 || page > 1) {
-      getUsers(); // Fetch users on initial load or when page changes
-    }
-  }, []); 
+    getUsers();
+  }, []); // Empty dependency array, runs only on mount
 
   return (
     <div>
@@ -53,7 +52,7 @@ const AdminDashboard = () => {
         </div>
       ) : users.length === 0 ? (
         <div>
-          <EmptyUsers /> {/* Show this component if no users are fetched */}
+          <EmptyUsers /> 
         </div>
       ) : (
         <div className="flex flex-col justify-center items-center">
@@ -65,13 +64,10 @@ const AdminDashboard = () => {
         </div>
       )}
 
-      {/* Load More Button */}
       {hasMore && !loading && (
         <div className="w-full flex justify-center">
           <button
-            onClick={() => {
-              getUsers(); // Fetch the next page of users
-            }}
+            onClick={() => getUsers()}
             className="mt-10 bg-blue-500 w-36 m-auto p-2 rounded-md my-10 text-white hover:bg-blue-800 transition-all hover:scale-110"
           >
             Load more
@@ -79,18 +75,16 @@ const AdminDashboard = () => {
         </div>
       )}
 
-      {/* Delete User Modal */}
       <ModalDeleteUser
         isOpen={DeleteUsersModal}
         onClose={() => dispatch(closeDeleteUser())}
         userId={deleteUserId}
       />
 
-      {/* Update User Modal */}
       <ModalUpdateUser
         isOpen={UpdateUserModal}
         onClose={() => dispatch(closeUpdateUser())}
-        user={userToUpdate ? userToUpdate : null} // Pass user data to update modal
+        user={userToUpdate ? userToUpdate : null}
       />
     </div>
   );

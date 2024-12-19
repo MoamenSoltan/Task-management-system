@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { Link } from "react-router";
-import { setCurrentUser, addUser } from "../Redux/Slices/userSlice";
+import { setCurrentUser, addUser,setPage } from "../Redux/Slices/userSlice";
 import axios from "axios";
 import { fetchUsers, setUsers, setLoading, incrementPage, toggleHasMore } from "../Redux/Slices/userSlice";
 
@@ -49,11 +49,9 @@ const Signup = () => {
       );
       // Append new users to existing users in the state
       dispatch(setUsers([...users, ...response.data]));
-      if (response.data.length > 0) {
-        dispatch(incrementPage());
-      } else {
-        dispatch(toggleHasMore());
-      }
+      
+     
+      
     } catch (error) {
       console.log("Error fetching users:", error);
       dispatch(setLoading(false));
@@ -65,15 +63,21 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch(setPage(1))
     const isValid = validate();
     if (!isValid) return;
 
     try {
       const response = await axios.post("https://67597b75099e3090dbe1d697.mockapi.io/api/users", user);
       dispatch(setCurrentUser(response.data));
+      dispatch(setUsers([...users, response.data]));
+      console.log("last user :", response.data);
+      console.log("updated  users :", users);
+
+      
 
       // Immediately refetch the users after successful signup
-      await getUsers(); // Ensure that the new user is appended to the user list
+      // await getUsers(); // Ensure that the new user is appended to the user list
 
       // Navigate to the appropriate dashboard based on role
       if (user.role === "admin") navigate("/admin/dashboard");
