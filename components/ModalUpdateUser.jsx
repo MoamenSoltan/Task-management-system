@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { closeUpdateUser } from "../Redux/Slices/modalSlice";  // Correctly import closeUpdateUser
 import { updateUser } from "../Redux/Slices/userSlice";
+import { toast } from "react-toastify";
 import axios from "axios";
 
 const ModalUpdateUser = ({ isOpen, onClose, user }) => {
@@ -29,9 +30,9 @@ const ModalUpdateUser = ({ isOpen, onClose, user }) => {
       );
       dispatch(updateUser(response.data));
       onClose();  // Close the modal after updating
+      toast.success("User updated successfully");
     } catch (error) {
-      
-      dispatch(setLoading(false)) 
+      toast.error("error updating user");
       alert('Failed to update user. Please try again.')
     }
   };

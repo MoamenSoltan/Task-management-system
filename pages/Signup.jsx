@@ -5,6 +5,8 @@ import { Link } from "react-router";
 import { setCurrentUser, addUser,setPage } from "../Redux/Slices/userSlice";
 import axios from "axios";
 import { fetchUsers, setUsers, setLoading, incrementPage, toggleHasMore } from "../Redux/Slices/userSlice";
+import {  toast } from 'react-toastify';
+
 
 const Signup = () => {
   const { currentUser, users, loading, hasMore, page } = useSelector((state) => state.users);
@@ -40,26 +42,26 @@ const Signup = () => {
     return true;
   };
 
-  const getUsers = async () => {
-    dispatch(setLoading(true));
+  // const getUsers = async () => {
+  //   dispatch(setLoading(true));
 
-    try {
-      const response = await axios.get(
-        `https://67597b75099e3090dbe1d697.mockapi.io/api/users?page=${page}&limit=2`
-      );
-      // Append new users to existing users in the state
-      dispatch(setUsers([...users, ...response.data]));
+  //   try {
+  //     const response = await axios.get(
+  //       `https://67597b75099e3090dbe1d697.mockapi.io/api/users?page=${page}&limit=2`
+  //     );
+  //     // Append new users to existing users in the state
+  //     dispatch(setUsers([...users, ...response.data]));
       
      
       
-    } catch (error) {
-      console.log("Error fetching users:", error);
-      dispatch(setLoading(false));
-      alert("Failed to load users. Please try again.");
-    } finally {
-      dispatch(setLoading(false));
-    }
-  };
+  //   } catch (error) {
+  //     console.log("Error fetching users:", error);
+  //     dispatch(setLoading(false));
+  //     alert("Failed to load users. Please try again.");
+  //   } finally {
+  //     dispatch(setLoading(false));
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,6 +73,9 @@ const Signup = () => {
       const response = await axios.post("https://67597b75099e3090dbe1d697.mockapi.io/api/users", user);
       dispatch(setCurrentUser(response.data));
       dispatch(setUsers([...users, response.data]));
+
+      toast.success("User registered successfully!");
+
       console.log("last user :", response.data);
       console.log("updated  users :", users);
 
@@ -83,6 +88,7 @@ const Signup = () => {
       if (user.role === "admin") navigate("/admin/dashboard");
       else if (user.role === "user") navigate("/user/dashboard");
     } catch (error) {
+      toast.error("an error occurred")
       console.log(error);
     }
   };

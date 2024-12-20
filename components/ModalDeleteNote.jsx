@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteNote } from '../Redux/Slices/notesSlice';
 import { closeDeleteNotes, ToggleDeleteNotes } from '../Redux/Slices/modalSlice';
+import { toast } from 'react-toastify';
 const ModalDeleteNote = () => {
     
     const {deleteNoteId}=useSelector(state=>state.modals)
@@ -17,9 +18,10 @@ const ModalDeleteNote = () => {
 //      dispatch(deleteNote(response.data.id));
 
       dispatch(closeDeleteNotes())
+      toast.success('Note deleted successfully');
     } catch (error) {
-      
-      alert('Failed to delete note. Please try again.')
+      toast.error("an error occurred")
+     
       
     }
   }

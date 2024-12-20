@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { closeUpdateNotes } from '../Redux/Slices/modalSlice';
 import { updateNote } from '../Redux/Slices/notesSlice';
-
+import { toast } from 'react-toastify';
 const ModalUpdateNote = ({ note }) => {
   const dispatch = useDispatch();
   const [updatedNote, setUpdatedNote] = useState({
@@ -28,10 +28,10 @@ const ModalUpdateNote = ({ note }) => {
       }));  
 
       dispatch(closeUpdateNotes());  // Close the modal after updating
+      toast.success('Note updated successfully.')  // Show success toast message
     } catch (error) {
       console.log("Error fetching notes:", error);
-      alert('Failed to update note. Please try again.')
-      
+      toast.error('Failed to update note. Please try again.')  
     }
   };
 

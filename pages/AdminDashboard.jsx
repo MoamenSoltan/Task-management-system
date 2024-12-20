@@ -58,7 +58,7 @@ const AdminDashboard = () => {
         <div className="flex flex-col justify-center items-center">
           {users.map((user) => (
             <div className="p-4 w-[80%]" key={user.id}>
-              <UserCard id={user.id} name={user.name} email={user.email} />
+              <UserCard id={user.id} name={user.name} email={user.email} role={user.role} />
             </div>
           ))}
         </div>

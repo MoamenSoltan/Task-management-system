@@ -6,9 +6,11 @@ import ProtectedRoute from '../components/ProtectedRoute'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import PageNoteFound from '../pages/PageNoteFound'
+import { ToastContainer } from 'react-toastify';
 // TODO: key takeaway from project : use response from backend to set data back for a re-render , look at signup and modalAddNotes and modalDeleteuser
 //TODO: better error handling like use alert for error messages , and 'finally' keyword in ry catch to set loading to false
 //TODO: signup should set the users state
+//TODO: make sure to handle multiple api calls in all of them , check modaldeleteuser 
 function App() {
 
 
@@ -59,6 +61,7 @@ function App() {
 
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </div>
   )
 }

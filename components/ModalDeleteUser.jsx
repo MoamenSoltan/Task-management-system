@@ -4,30 +4,42 @@ import { deleteUser } from "../Redux/Slices/userSlice"; // Import deleteUser act
 import { closeDeleteUser } from "../Redux/Slices/modalSlice";  // Ensure correct import for closing modal
 import axios from "axios";
 import { setCurrentUser } from "../Redux/Slices/userSlice";
+import { setLoading } from "../Redux/Slices/userSlice";
+import { toast } from "react-toastify";
 
 const ModalDeleteUser = ({ isOpen, onClose, userId }) => {
 
-  const {currentUser}=useSelector(state=>state.users)
+  const {currentUser,loading}=useSelector(state=>state.users)
+
   const dispatch = useDispatch();
 
   // Handle delete user action
   const handleDelete = async () => {
     try {
+      if(loading)
+        return
+      //handle multiple calls 
+      dispatch(setLoading(true))
+
+      
       // Make API request to delete the user
      const response =  await axios.delete(`https://67597b75099e3090dbe1d697.mockapi.io/api/users/${userId}`);
       
       // Dispatch action to update Redux store and remove the user
       dispatch(deleteUser(userId));
        // dispatch(deleteUser(response.data.id)); //could be used instead of userId
-
-      if(currentUser.id===userId) 
+       toast.success("User deleted successfully")
+      if(currentUser.id===userId) {
         dispatch(setCurrentUser(null))  // Log out the user if he deleted his account
+        toast.error("You are logged out now")
+
+      }
 
       // Close the modal after deletion
       onClose();
     } catch (error) {
       console.log("Error fetching notes:", error);
-      alert('Failed to delete user. Please try again.')
+      toast.error("Failed to delete user. Please try again.")
       
     }
   };

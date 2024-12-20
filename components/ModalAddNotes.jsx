@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { setNote, fetchNotes, addNote } from "../Redux/Slices/notesSlice";
+import { toast } from "react-toastify";
+
 const ModalAddNotes = () => {
   const { notes, note } = useSelector((state) => state.notes);
   const dispatch = useDispatch();
@@ -17,17 +19,21 @@ const ModalAddNotes = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-   const response = await axios.post(
-      "https://67597b75099e3090dbe1d697.mockapi.io/api/notes",
-      note
-    );
-    // dispatch(fetchNotes([note]))
-    // console.log("notes after last update",notes);
-    dispatch(addNote(response.data));//update the state 
-
-    dispatch(setNote({ title: "", description: "", date: "" }));
-    dispatch(closeAddNotes());
+    try {
+      const response = await axios.post(
+        "https://67597b75099e3090dbe1d697.mockapi.io/api/notes",
+        note
+      );
+      // dispatch(fetchNotes([note]))
+      // console.log("notes after last update",notes);
+      dispatch(addNote(response.data));//update the state 
+  
+      dispatch(setNote({ title: "", description: "", date: "" }));
+      dispatch(closeAddNotes());
+      toast.success("Note Added Successfully");
+    } catch (error) {
+      toast.error("an error occurred")
+    }
   };
 
   // const {AddNotesModal}=useSelector(state=>state.modals)

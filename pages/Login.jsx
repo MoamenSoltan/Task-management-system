@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router'
 import { Link } from "react-router"
 import { setCurrentUser,fetchUsers } from "../Redux/Slices/userSlice"
 import { useDispatch } from "react-redux"
+import { toast } from "react-toastify"
 // validation func returns a bool 
 const Login = () => {
 
@@ -57,10 +58,12 @@ const Login = () => {
       dispatch(setCurrentUser({...user,role:"user"}))
       
       navigate('/user/dashboard')
+      toast.success("logged in successfully")
     
       
     } catch (error) {
       console.log(error)
+      toast.error("failed to login")
     }
 
   }

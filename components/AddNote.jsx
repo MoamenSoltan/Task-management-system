@@ -7,6 +7,7 @@ import Modal from 'react-modal';
 import ModalAddNotes from './ModalAddNotes';
 import ModalTemplate from './ModalTemplate';
 
+
 Modal.setAppElement('#root'); // Required for accessibility
 
 const AddNote = () => {
